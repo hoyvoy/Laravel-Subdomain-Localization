@@ -68,6 +68,7 @@ class RouterTest extends TestCase
     public function it_translates_the_current_route()
     {
         $this->sendRequest('GET', $this->dePathWithoutParameter, 'de');
+
         $this->assertEquals($this->getUri($this->enPathWithoutParameter, 'en'),
             app('localization.router')->current('en'));
 

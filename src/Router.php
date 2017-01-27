@@ -141,7 +141,7 @@ class Router
         }
 
         if (app()['router']->current()) {
-            return $this->findRouteNameByPath(app()['router']->current()->getPath());
+            return $this->findRouteNameByPath(app()['router']->current()->uri());
         }
 
         return false;
@@ -188,7 +188,7 @@ class Router
     protected function findRoutePathByName($routeName, $locale = null)
     {
         if (app()['translator']->has($routeName, $locale)) {
-            return $routePath = app()['translator']->trans($routeName, [], "", $locale);
+            return $routePath = app()['translator']->trans($routeName, [], $locale);
         }
 
         return false;
