@@ -1,8 +1,8 @@
 {
-    "name": "hoyvoy/Laravel-Subdomain-Localization",
+    "name": "hoyvoy/laravel-subdomain-localization",
     "description": "Subdomain localization support for Laravel",
     "keywords": ["subdomain", "localization", "laravel", "php"],
-    "homepage": "https://github.com/hoyvoy/Laravel-Subdomain-Localization",
+    "homepage": "https://github.com/hoyvoy/laravel-subdomain-localization",
     "license": "MIT",
     "version": "5.4.0",
     "authors": [
