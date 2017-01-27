@@ -1,4 +1,4 @@
-<?php namespace LaurentEsc\Localization;
+<?php namespace Hoyvoy\Localization;
 
 use Illuminate\Support\ServiceProvider;
 

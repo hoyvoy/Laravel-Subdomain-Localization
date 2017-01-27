@@ -1,8 +1,5 @@
 # Laravel-Subdomain-Localization
 
-[![Latest Stable Version](https://poser.pugx.org/laurentesc/laravel-subdomain-localization/version)](https://packagist.org/packages/laurentesc/laravel-subdomain-localization) [![Total Downloads](https://poser.pugx.org/laurentesc/laravel-subdomain-localization/d/total.png)](https://packagist.org/packages/laurentesc/laravel-subdomain-localization)
- [![Build Status](https://api.travis-ci.org/LaurentEsc/Laravel-Subdomain-Localization.png)](https://travis-ci.org/LaurentEsc/Laravel-Subdomain-Localization)
-
 Subdomain localization support for Laravel 5.4.*
 
 ## Table of Contents
@@ -28,7 +25,7 @@ Subdomain localization support for Laravel 5.4.*
 
 Add Laravel-Subdomain-Localization to your `composer.json` file.
 
-    "laurentesc/laravel-subdomain-localization": "dev-master"
+    "hoyvoy/laravel-subdomain-localization": "dev-master"
 
 Run `composer install` to get the latest version of the package.
 
@@ -44,7 +41,7 @@ To register the service provider in your Laravel application, open `config/app.p
 
 ```php
 	...
-	LaurentEsc\Localization\LocalizationServiceProvider::class
+	Hoyvoy\Localization\LocalizationServiceProvider::class
 	...
 ```
 
@@ -54,8 +51,8 @@ If you want to use them, open `config/app.php` and add the following lines to th
 
 ```php
 	...
-    'Localize'  => LaurentEsc\Localization\Facades\Localize::class,
-    'Router'    => LaurentEsc\Localization\Facades\Router::class,
+    'Localize'  => Hoyvoy\Localization\Facades\Localize::class,
+    'Router'    => Hoyvoy\Localization\Facades\Router::class,
 	...
 ```
 
@@ -65,7 +62,7 @@ If you want to use it, open `app/Http/kernel.php` and register this route middle
 
 ```php
 	...
-    'localize' => \LaurentEsc\Localization\Middleware\Localization::class,
+    'localize' => \Hoyvoy\Localization\Middleware\Localization::class,
 	...
 ```
 
@@ -77,7 +74,7 @@ Open `app/Providers/RouteServiceProvider.php` and add a call to detectLocale() f
 
 ```php
 	...
-	use LaurentEsc\Localization\Facades\Localize;
+	use Hoyvoy\Localization\Facades\Localize;
 	...
     public function boot(Router $router)
     {
@@ -159,7 +156,7 @@ You can of course name the language files as you wish, and pass the proper prefi
 In order to edit the default package configuration, you can run the following artisan command:
 
 ```
-php artisan vendor:publish --provider="LaurentEsc\Localization\LocalizationServiceProvider" --tag="config"
+php artisan vendor:publish --provider="Hoyvoy\Localization\LocalizationServiceProvider" --tag="config"
 ```
 
 Once you have done that, you will find the config file at `config/localization.php`.
@@ -224,8 +221,8 @@ You can pass route parameters if necessary. If you don't give a specific locale,
 
 ### Changelog
 
-To see what has changed in recent versions, see the [CHANGELOG](https://github.com/LaurentEsc/Laravel-Subdomain-Localization/blob/master/CHANGELOG.md).
+To see what has changed in recent versions, see the [CHANGELOG](https://github.com/hoyvoy/Laravel-Subdomain-Localization/blob/master/CHANGELOG.md).
 
 ### License
 
-This package is licensed under the [MIT license](https://github.com/LaurentEsc/Laravel-Subdomain-Localization/blob/master/LICENSE).
+This package is licensed under the [MIT license](https://github.com/hoyvoy/Laravel-Subdomain-Localization/blob/master/LICENSE).

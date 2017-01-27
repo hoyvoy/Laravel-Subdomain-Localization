@@ -6,7 +6,7 @@ app('router')->group(['middleware' => 'Illuminate\Cookie\Middleware\AddQueuedCoo
         return response('not-localized');
     });
 
-    app('router')->group(['middleware' => ['LaurentEsc\Localization\Middleware\Localization']], function () {
+    app('router')->group(['middleware' => ['Hoyvoy\Localization\Middleware\Localization']], function () {
 
         app('router')->get('localized', function () {
             return response('localized');

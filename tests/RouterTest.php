@@ -17,15 +17,15 @@ class RouterTest extends TestCase
     protected function getPackageProviders($app)
     {
         return [
-            'LaurentEsc\Localization\LocalizationServiceProvider'
+            'Hoyvoy\Localization\LocalizationServiceProvider'
         ];
     }
 
     protected function getPackageAliases($app)
     {
         return [
-            'Localize' => 'LaurentEsc\Localization\Facades\Localize',
-            'Router' => 'LaurentEsc\Localization\Facades\Router',
+            'Localize' => 'Hoyvoy\Localization\Facades\Localize',
+            'Router' => 'Hoyvoy\Localization\Facades\Router',
         ];
     }
 

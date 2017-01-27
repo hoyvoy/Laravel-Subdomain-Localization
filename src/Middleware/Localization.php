@@ -1,9 +1,9 @@
-<?php namespace LaurentEsc\Localization\Middleware;
+<?php namespace Hoyvoy\Localization\Middleware;
 
 use Illuminate\Http\RedirectResponse;
 use Closure;
-use LaurentEsc\Localization\Facades\Localize;
-use LaurentEsc\Localization\Facades\Router;
+use Hoyvoy\Localization\Facades\Localize;
+use Hoyvoy\Localization\Facades\Router;
 
 class Localization
 {

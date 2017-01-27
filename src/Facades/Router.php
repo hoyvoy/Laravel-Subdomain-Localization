@@ -1,4 +1,4 @@
-<?php namespace LaurentEsc\Localization\Facades;
+<?php namespace Hoyvoy\Localization\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
