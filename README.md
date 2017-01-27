@@ -3,7 +3,7 @@
 [![Latest Stable Version](https://poser.pugx.org/laurentesc/laravel-subdomain-localization/version)](https://packagist.org/packages/laurentesc/laravel-subdomain-localization) [![Total Downloads](https://poser.pugx.org/laurentesc/laravel-subdomain-localization/d/total.png)](https://packagist.org/packages/laurentesc/laravel-subdomain-localization)
  [![Build Status](https://api.travis-ci.org/LaurentEsc/Laravel-Subdomain-Localization.png)](https://travis-ci.org/LaurentEsc/Laravel-Subdomain-Localization)
 
-Subdomain localization support for Laravel.
+Subdomain localization support for Laravel 5.4.*
 
 ## Table of Contents
 
