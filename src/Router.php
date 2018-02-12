@@ -223,7 +223,7 @@ class Router
 
         if (!empty($url)) {
             $url .= isset($parsed_url['path']) ? '/'.ltrim($parsed_url['path'], '/') : '';
-        } else if (empty($url)) {
+        } elseif (empty($url)) {
             $url .= isset($parsed_url['path']) ? $parsed_url['path'] : '';
         }
 
