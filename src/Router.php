@@ -194,7 +194,7 @@ class Router
     protected function findRoutePathByName($routeName, $locale = null)
     {
         if (app()['translator']->has($routeName, $locale)) {
-            return $routePath = app()['translator']->trans($routeName, [], $locale);
+            return app()['translator']->trans($routeName, [], $locale);
         }
 
         return false;
@@ -223,7 +223,7 @@ class Router
 
         if (!empty($url)) {
             $url .= isset($parsed_url['path']) ? '/'.ltrim($parsed_url['path'], '/') : '';
-        } else {
+        } else if (empty($url)) {
             $url .= isset($parsed_url['path']) ? $parsed_url['path'] : '';
         }
 
