@@ -49,7 +49,7 @@ class RouterTest extends TestCase
      *
      * @return void
      */
-    public function it_reaches_translated_routes()
+    public function testItReachesTranslatedRoutes()
     {
         $this->sendRequest('GET', $this->dePathWithoutParameter, 'de');
         $this->assertResponseOk();
@@ -63,7 +63,7 @@ class RouterTest extends TestCase
      *
      * @return void
      */
-    public function it_returns_a_redirect_url()
+    public function testItReturnsARedirectUrl()
     {
         $this->setRequestContext('GET', $this->dePathWithoutParameter, null, [], ['locale' => 'de']);
         $this->assertEquals($this->getUri($this->dePathWithoutParameter, 'de'),
@@ -79,7 +79,7 @@ class RouterTest extends TestCase
      *
      * @return void
      */
-    public function it_translates_the_current_route()
+    public function testItTranslatesTheCurrentRoute()
     {
         $this->sendRequest('GET', $this->dePathWithoutParameter, 'de');
 
@@ -98,7 +98,7 @@ class RouterTest extends TestCase
      *
      * @return void
      */
-    public function it_returns_translated_versions_of_the_current_route_for_available_locales()
+    public function testItReturnsTranslatedVersionsOfTheCurrentRouteForAvailableLocales()
     {
         $this->sendRequest('GET', $this->dePathWithoutParameter, 'de');
         $this->assertEquals([
@@ -119,7 +119,7 @@ class RouterTest extends TestCase
      *
      * @return void
      */
-    public function it_resolves_a_translated_route_path()
+    public function testItResolvesATranslatedRoutePath()
     {
         $this->setRequestContext('GET', '', 'de');
         $this->assertEquals($this->dePathWithoutParameter,
@@ -135,7 +135,7 @@ class RouterTest extends TestCase
      *
      * @return void
      */
-    public function it_translates_a_route_into_an_url()
+    public function testItTranslatesARouteIntoAnUrl()
     {
         $this->setRequestContext('GET', '');
 

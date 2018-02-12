@@ -41,7 +41,7 @@ class LocalizeTest extends TestCase
      *
      * @return void
      */
-    public function it_returns_the_available_locales()
+    public function testItReturnsTheAvailableLocales()
     {
         $availableLocales = ['en', 'es', 'fr', 'de'];
 
@@ -55,7 +55,7 @@ class LocalizeTest extends TestCase
      *
      * @return void
      */
-    public function it_does_not_redirect_a_non_localized_route()
+    public function testItDoesNotRedirectANonLocalizedRoute()
     {
         $this->sendRequest('GET', $this->pathNotLocalized);
 
@@ -67,7 +67,7 @@ class LocalizeTest extends TestCase
      *
      * @return void
      */
-    public function it_does_not_redirect_if_locale_is_not_missing()
+    public function testItDoesNotRedirectIfLocaleIsNotMissing()
     {
         $this->sendRequest('GET', $this->pathLocalized, 'de');
 
@@ -83,7 +83,7 @@ class LocalizeTest extends TestCase
      *
      * @return void
      */
-    public function it_detects_and_sets_the_locale_from_the_url()
+    public function testItDetectsAndSetsTheLocaleFromTheUrl()
     {
         $this->sendRequest('GET', $this->pathLocalized, 'de');
 
@@ -99,7 +99,7 @@ class LocalizeTest extends TestCase
      *
      * @return void
      */
-    public function it_detects_and_sets_the_locale_from_the_cookies()
+    public function testItDetectsAndSetsTheLocaleFromTheCookies()
     {
         $this->sendRequest('GET', $this->pathLocalized, null, [], ['locale' => 'de']);
 
@@ -117,7 +117,7 @@ class LocalizeTest extends TestCase
      *
      * @return void
      */
-    public function it_ignores_cookies_when_cookie_localization_is_disabled()
+    public function testItIgnoresCookiesWhenCookieLocalizationIsDisabled()
     {
         // Disable cookie localization
         app('config')->set('localization.cookie_localization', false);
@@ -138,7 +138,7 @@ class LocalizeTest extends TestCase
      *
      * @return void
      */
-    public function it_detects_and_sets_the_locale_from_the_browser()
+    public function testItDetectsAndSetsTheLocaleFromTheBrowser()
     {
         $this->sendRequest('GET', $this->pathLocalized, null, [], [], [], ['HTTP_ACCEPT_LANGUAGE' => 'de']);
 
@@ -156,7 +156,7 @@ class LocalizeTest extends TestCase
      *
      * @return void
      */
-    public function it_ignores_browser_settings_when_browser_localization_is_disabled()
+    public function testItIgnoresBrowserSettingsWhenBrowserLocalizationIsDisabled()
     {
         // Disable browser localization
         app('config')->set('localization.browser_localization', false);
@@ -177,7 +177,7 @@ class LocalizeTest extends TestCase
      *
      * @return void
      */
-    public function it_detects_and_sets_the_locale_from_the_config()
+    public function testItDetectsAndSetsTheLocaleFromTheConfig()
     {
         $this->sendRequest('GET', $this->pathLocalized);
 
@@ -195,7 +195,7 @@ class LocalizeTest extends TestCase
      *
      * @return void
      */
-    public function it_responds_with_the_cookie_locale()
+    public function testItRespondsWithTheCookieLocale()
     {
         $response = $this->sendRequest('GET', $this->pathLocalized, 'de');
 
@@ -208,7 +208,7 @@ class LocalizeTest extends TestCase
      *
      * @return void
      */
-    public function it_does_not_respond_with_the_cookie_locale_when_cookie_localization_is_disabled()
+    public function testItDoesNotRespondWithTheCookieLocaleWhenCookieLocalizationIsDisabled()
     {
         // Disable cookie localization
         app('config')->set('localization.cookie_localization', false);
