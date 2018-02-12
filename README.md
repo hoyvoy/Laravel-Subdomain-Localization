@@ -1,13 +1,10 @@
 # Laravel-Subdomain-Localization
 
-Subdomain localization support for Laravel 5.4.*
+Subdomain localization support for Laravel 5.6.*
 
 ## Table of Contents
 
 - <a href="#installation">Installation</a>
-    - <a href="#composer">Composer</a>
-    - <a href="#manually">Manually</a>
-    - <a href="#laravel">Laravel</a>
 - <a href="#usage">Usage</a>
     - <a href="#locale-detection">Locale detection</a>
     - <a href="#middleware">Middleware</a>
@@ -21,29 +18,17 @@ Subdomain localization support for Laravel 5.4.*
 
 ## Installation
 
-### Composer
+Install with composer
+~~~
+composer require hoyvoy/laravel-subdomain-localization
+~~~
 
-Add Laravel-Subdomain-Localization to your `composer.json` file.
+From Laravel 5.5 onwards, it's possible to take advantage of auto-discovery of the service provider.
+For Laravel versions before 5.5, you must register the service provider in your config/app.php
 
-    "hoyvoy/laravel-subdomain-localization": "dev-master"
-
-Run `composer install` to get the latest version of the package.
-
-### Manually
-
-It's recommended that you use Composer, however you can download and install from this repository.
-
-### Laravel
-
-Laravel-Subdomain-Localization comes with a service provider for Laravel.
-
-To register the service provider in your Laravel application, open `config/app.php` and add the following line to the `providers` array:
-
-```php
-	...
-	Hoyvoy\Localization\LocalizationServiceProvider::class
-	...
-```
+~~~
+Hoyvoy\Localization\LocalizationServiceProvider::class,
+~~~
 
 Laravel-Subdomain-Localization comes with 2 facades: `Localize` and `Router`.
 
