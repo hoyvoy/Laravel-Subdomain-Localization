@@ -1,31 +1,32 @@
-<?php namespace Hoyvoy\Localization;
+<?php
+
+namespace Hoyvoy\Localization;
 
 use Illuminate\Http\Request;
 
 class Router
 {
-
     /**
      * @var Request
      */
     protected $request;
 
     /**
-     * An array that contains all routes that should be translated
+     * An array that contains all routes that should be translated.
      *
      * @var array
      */
-    protected $translatedRoutes = array();
+    protected $translatedRoutes = [];
 
     /**
-     * An array that contains information about the current request
+     * An array that contains information about the current request.
      *
      * @var array
      */
     protected $parsed_url;
 
     /**
-     * Adds the detected locale to the current unlocalized URL
+     * Adds the detected locale to the current unlocalized URL.
      *
      * @return string
      */
@@ -34,15 +35,16 @@ class Router
         $parsed_url = parse_url(app()['request']->fullUrl());
 
         // Add locale to the host
-        $parsed_url['host'] = app()->getLocale() . '.' . $this->getDomain();
+        $parsed_url['host'] = app()->getLocale().'.'.$this->getDomain();
 
         return $this->unparseUrl($parsed_url);
     }
 
     /**
-     * Translate the current route for the given locale
+     * Translate the current route for the given locale.
      *
      * @param $locale
+     *
      * @return bool|string
      */
     public function current($locale)
@@ -51,9 +53,10 @@ class Router
     }
 
     /**
-     * Translate the current route for the given locale
+     * Translate the current route for the given locale.
      *
      * @param bool $excludeCurrentLocale
+     *
      * @return array
      */
     public function getCurrentVersions($excludeCurrentLocale = true)
@@ -75,11 +78,12 @@ class Router
     }
 
     /**
-     * Return translated URL from route
+     * Return translated URL from route.
      *
-     * @param string $routeName
+     * @param string       $routeName
      * @param string|false $routeAttributes
      * @param string|false $locale
+     *
      * @return string|bool
      */
     public function url($routeName, $routeAttributes = null, $locale = null)
@@ -97,7 +101,7 @@ class Router
         $parsed_url = $this->parsed_url;
 
         // Add locale to the host
-        $parsed_url['host'] = $locale . '.' . $this->getDomain();
+        $parsed_url['host'] = $locale.'.'.$this->getDomain();
 
         // Resolve the route path for the given route name
         if (!$parsed_url['path'] = $this->findRoutePathByName($routeName, $locale)) {
@@ -113,9 +117,10 @@ class Router
     }
 
     /**
-     * Resolve a translated route path for the given route name
+     * Resolve a translated route path for the given route name.
      *
      * @param $routeName
+     *
      * @return string
      */
     public function resolve($routeName)
@@ -130,7 +135,7 @@ class Router
     }
 
     /**
-     * Get the current route name
+     * Get the current route name.
      *
      * @return bool|string
      */
@@ -148,7 +153,7 @@ class Router
     }
 
     /**
-     * Get the current route name
+     * Get the current route name.
      *
      * @return bool|string
      */
@@ -162,9 +167,10 @@ class Router
     }
 
     /**
-     * Find the route name matching the given route path
+     * Find the route name matching the given route path.
      *
      * @param string $routePath
+     *
      * @return bool|string
      */
     protected function findRouteNameByPath($routePath)
@@ -179,10 +185,11 @@ class Router
     }
 
     /**
-     * Find the route path matching the given route name
+     * Find the route path matching the given route name.
      *
-     * @param string $routeName
+     * @param string      $routeName
      * @param string|null $locale
+     *
      * @return string
      */
     protected function findRoutePathByName($routeName, $locale = null)
@@ -195,42 +202,44 @@ class Router
     }
 
     /**
-     * Get url using array data from parse_url
+     * Get url using array data from parse_url.
      *
      * @param array|false $parsed_url Array of data from parse_url function
-     * @return string               Returns URL as string.
+     *
+     * @return string Returns URL as string.
      */
     protected function unparseUrl($parsed_url)
     {
         if (empty($parsed_url)) {
-            return "";
+            return '';
         }
 
-        $url = "";
-        $url .= isset($parsed_url['scheme']) ? $parsed_url['scheme'] . '://' : '';
+        $url = '';
+        $url .= isset($parsed_url['scheme']) ? $parsed_url['scheme'].'://' : '';
         $url .= isset($parsed_url['host']) ? $parsed_url['host'] : '';
-        $url .= isset($parsed_url['port']) ? ':' . $parsed_url['port'] : '';
+        $url .= isset($parsed_url['port']) ? ':'.$parsed_url['port'] : '';
         $user = isset($parsed_url['user']) ? $parsed_url['user'] : '';
-        $pass = isset($parsed_url['pass']) ? ':' . $parsed_url['pass'] : '';
-        $url .= $user . (($user || $pass) ? "$pass@" : '');
+        $pass = isset($parsed_url['pass']) ? ':'.$parsed_url['pass'] : '';
+        $url .= $user.(($user || $pass) ? "$pass@" : '');
 
         if (!empty($url)) {
-            $url .= isset($parsed_url['path']) ? '/' . ltrim($parsed_url['path'], '/') : '';
+            $url .= isset($parsed_url['path']) ? '/'.ltrim($parsed_url['path'], '/') : '';
         } else {
             $url .= isset($parsed_url['path']) ? $parsed_url['path'] : '';
         }
 
-        $url .= isset($parsed_url['query']) ? '?' . $parsed_url['query'] : '';
-        $url .= isset($parsed_url['fragment']) ? '#' . $parsed_url['fragment'] : '';
+        $url .= isset($parsed_url['query']) ? '?'.$parsed_url['query'] : '';
+        $url .= isset($parsed_url['fragment']) ? '#'.$parsed_url['fragment'] : '';
 
         return $url;
     }
 
     /**
-     * Change route attributes for the ones in the $attributes array
+     * Change route attributes for the ones in the $attributes array.
      *
      * @param $attributes array Array of attributes
      * @param string $route string route to substitute
+     *
      * @return string route with attributes changed
      */
     protected function substituteAttributesInRoute($attributes, $route)
@@ -247,7 +256,9 @@ class Router
     }
 
     /**
-     * Stores the parsed url array after a few modifications
+     * Stores the parsed url array after a few modifications.
+     *
+     * @return void
      */
     protected function parseCurrentUrl()
     {
@@ -264,7 +275,7 @@ class Router
     }
 
     /**
-     * Get domain from package config
+     * Get domain from package config.
      *
      * @return string
      */
@@ -272,5 +283,4 @@ class Router
     {
         return app()['config']->get('localization.domain');
     }
-
 }

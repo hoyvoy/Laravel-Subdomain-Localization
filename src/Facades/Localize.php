@@ -1,10 +1,11 @@
-<?php namespace Hoyvoy\Localization\Facades;
+<?php 
+
+namespace Hoyvoy\Localization\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
 class Localize extends Facade
 {
-
     /**
      * Get the registered name of the component.
      *
@@ -14,5 +15,4 @@ class Localize extends Facade
     {
         return 'localization.localize';
     }
-
 }

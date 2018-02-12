@@ -4,7 +4,6 @@ namespace Hoyvoy\Tests;
 
 class RouterTest extends TestCase
 {
-
     protected $routeNameWithoutParameter = 'Localize::routes.good_morning';
     protected $dePathWithoutParameter = 'guten-morgen';
     protected $enPathWithoutParameter = 'good-morning';
@@ -16,25 +15,39 @@ class RouterTest extends TestCase
     protected $enPathWithParameter1 = 'hello/samplename';
     protected $routeParameters = ['username' => 'samplename'];
 
+    /**
+     * Get package providers.
+     *
+     * @param \Illuminate\Foundation\Application $app
+     *
+     * @return array
+     */
     protected function getPackageProviders($app)
     {
         return [
-            'Hoyvoy\Localization\LocalizationServiceProvider'
-        ];
-    }
-
-    protected function getPackageAliases($app)
-    {
-        return [
-            'Localize' => 'Hoyvoy\Localization\Facades\Localize',
-            'Router' => 'Hoyvoy\Localization\Facades\Router',
+            'Hoyvoy\Localization\LocalizationServiceProvider',
         ];
     }
 
     /**
-     * It translates routes
+     * Get package aliases.
      *
-     * @test
+     * @param \Illuminate\Foundation\Application $app
+     *
+     * @return array
+     */
+    protected function getPackageAliases($app)
+    {
+        return [
+            'Localize' => 'Hoyvoy\Localization\Facades\Localize',
+            'Router'   => 'Hoyvoy\Localization\Facades\Router',
+        ];
+    }
+
+    /**
+     * It translates routes.
+     *
+     * @return void
      */
     public function it_reaches_translated_routes()
     {
@@ -46,9 +59,9 @@ class RouterTest extends TestCase
     }
 
     /**
-     * It returns a redirect URL
+     * It returns a redirect URL.
      *
-     * @test
+     * @return void
      */
     public function it_returns_a_redirect_url()
     {
@@ -63,9 +76,9 @@ class RouterTest extends TestCase
 
 
     /**
-     * It translates the current route
+     * It translates the current route.
      *
-     * @test
+     * @return void
      */
     public function it_translates_the_current_route()
     {
@@ -82,15 +95,15 @@ class RouterTest extends TestCase
     }
 
     /**
-     * It returns translated versions of the current route for all available locales
+     * It returns translated versions of the current route for all available locales.
      *
-     * @test
+     * @return void
      */
     public function it_returns_translated_versions_of_the_current_route_for_available_locales()
     {
         $this->sendRequest('GET', $this->dePathWithoutParameter, 'de');
         $this->assertEquals([
-            'en' => $this->getUri($this->enPathWithoutParameter, 'en')
+            'en' => $this->getUri($this->enPathWithoutParameter, 'en'),
         ], app('localization.router')->getCurrentVersions());
 
         $this->refresh();
@@ -98,14 +111,14 @@ class RouterTest extends TestCase
         $this->sendRequest('GET', $this->enPathWithParameter1, 'en');
         $this->assertEquals([
             'en' => $this->getUri($this->enPathWithParameter1, 'en'),
-            'de' => $this->getUri($this->dePathWithParameter1, 'de')
+            'de' => $this->getUri($this->dePathWithParameter1, 'de'),
         ], app('localization.router')->getCurrentVersions(false));
     }
 
     /**
-     * It resolves a translated route path
+     * It resolves a translated route path.
      *
-     * @test
+     * @return void
      */
     public function it_resolves_a_translated_route_path()
     {
@@ -119,9 +132,9 @@ class RouterTest extends TestCase
     }
 
     /**
-     * It translates a route into an url
+     * It translates a route into an url.
      *
-     * @test
+     * @return void
      */
     public function it_translates_a_route_into_an_url()
     {
