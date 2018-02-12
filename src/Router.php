@@ -64,7 +64,6 @@ class Router
         $versions = [];
 
         foreach (app()['localization.localize']->getAvailableLocales() as $locale) {
-
             if ($excludeCurrentLocale && $locale == app()->getLocale()) {
                 continue;
             }
@@ -245,8 +244,8 @@ class Router
     protected function substituteAttributesInRoute($attributes, $route)
     {
         foreach ($attributes as $key => $value) {
-            $route = str_replace("{".$key."}", $value, $route);
-            $route = str_replace("{".$key."?}", $value, $route);
+            $route = str_replace('{'.$key.'}', $value, $route);
+            $route = str_replace('{'.$key.'?}', $value, $route);
         }
 
         // delete empty optional arguments that are not in the $attributes array
