@@ -74,7 +74,6 @@ class RouterTest extends TestCase
             app('localization.router')->getRedirectURL());
     }
 
-
     /**
      * It translates the current route.
      *
@@ -138,7 +137,6 @@ class RouterTest extends TestCase
      */
     public function it_translates_a_route_into_an_url()
     {
-
         $this->setRequestContext('GET', '');
 
         $this->assertEquals(
@@ -165,5 +163,4 @@ class RouterTest extends TestCase
             app('localization.router')->url($this->routeNameWithParameter, $this->routeParameters)
         );
     }
-
 }

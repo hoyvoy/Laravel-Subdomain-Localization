@@ -25,7 +25,6 @@ class LocalizationServiceProvider extends ServiceProvider
      */
     public function register()
     {
-
         $packageConfigFile = __DIR__.'/../config/config.php';
         $this->mergeConfigFrom(
             $packageConfigFile, 'localization'
@@ -38,6 +37,5 @@ class LocalizationServiceProvider extends ServiceProvider
         $this->app->singleton('localization.router', function () {
             return new Router();
         });
-
     }
 }

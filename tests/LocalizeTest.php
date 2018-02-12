@@ -4,7 +4,6 @@ namespace Hoyvoy\Tests;
 
 class LocalizeTest extends TestCase
 {
-
     protected $pathLocalized = 'localized';
     protected $pathNotLocalized = 'not-localized';
 
