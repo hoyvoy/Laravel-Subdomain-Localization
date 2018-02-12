@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/hoyvoy/laravel-subdomain-localization.svg?branch=master)](https://travis-ci.org/hoyvoy/laravel-subdomain-localization) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/38134c1de82e46459683892c7135dc12)](https://www.codacy.com/app/mario-hoyvoy/laravel-subdomain-localization?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=hoyvoy/laravel-subdomain-localization&amp;utm_campaign=Badge_Grade) [![StyleCI](https://styleci.io/repos/80190415/shield?branch=master)](https://styleci.io/repos/80190415)
+
 # Laravel-Subdomain-Localization
 
 Subdomain localization support for Laravel 5.6.*
