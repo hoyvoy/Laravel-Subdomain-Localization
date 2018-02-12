@@ -1,5 +1,7 @@
 <?php
 
+namespace Hoyvoy\Tests;
+
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Request;
 use Orchestra\Testbench\BrowserKit\TestCase as OrchestraTestCase;

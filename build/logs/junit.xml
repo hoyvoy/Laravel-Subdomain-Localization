@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="Application Test Suite" tests="17" assertions="51" errors="0" failures="0" skipped="0" time="0.256315">
+    <testsuite name="Hoyvoy\Tests\LocalizeTest" file="/Users/mario/Documents/webs/laravel-subdomain-localization/tests/LocalizeTest.php" tests="11" assertions="37" errors="0" failures="0" skipped="0" time="0.183140">
+      <testcase name="it_returns_the_available_locales" class="Hoyvoy\Tests\LocalizeTest" classname="Hoyvoy.Tests.LocalizeTest" file="/Users/mario/Documents/webs/laravel-subdomain-localization/tests/LocalizeTest.php" line="31" assertions="1" time="0.073929"/>
+      <testcase name="it_does_not_redirect_a_non_localized_route" class="Hoyvoy\Tests\LocalizeTest" classname="Hoyvoy.Tests.LocalizeTest" file="/Users/mario/Documents/webs/laravel-subdomain-localization/tests/LocalizeTest.php" line="45" assertions="1" time="0.026233"/>
+      <testcase name="it_does_not_redirect_if_locale_is_not_missing" class="Hoyvoy\Tests\LocalizeTest" classname="Hoyvoy.Tests.LocalizeTest" file="/Users/mario/Documents/webs/laravel-subdomain-localization/tests/LocalizeTest.php" line="57" assertions="3" time="0.010629"/>
+      <testcase name="it_detects_and_sets_the_locale_from_the_url" class="Hoyvoy\Tests\LocalizeTest" classname="Hoyvoy.Tests.LocalizeTest" file="/Users/mario/Documents/webs/laravel-subdomain-localization/tests/LocalizeTest.php" line="73" assertions="3" time="0.010067"/>
+      <testcase name="it_detects_and_sets_the_locale_from_the_cookies" class="Hoyvoy\Tests\LocalizeTest" classname="Hoyvoy.Tests.LocalizeTest" file="/Users/mario/Documents/webs/laravel-subdomain-localization/tests/LocalizeTest.php" line="89" assertions="5" time="0.009584"/>
+      <testcase name="it_ignores_cookies_when_cookie_localization_is_disabled" class="Hoyvoy\Tests\LocalizeTest" classname="Hoyvoy.Tests.LocalizeTest" file="/Users/mario/Documents/webs/laravel-subdomain-localization/tests/LocalizeTest.php" line="107" assertions="5" time="0.008655"/>
+      <testcase name="it_detects_and_sets_the_locale_from_the_browser" class="Hoyvoy\Tests\LocalizeTest" classname="Hoyvoy.Tests.LocalizeTest" file="/Users/mario/Documents/webs/laravel-subdomain-localization/tests/LocalizeTest.php" line="128" assertions="5" time="0.008792"/>
+      <testcase name="it_ignores_browser_settings_when_browser_localization_is_disabled" class="Hoyvoy\Tests\LocalizeTest" classname="Hoyvoy.Tests.LocalizeTest" file="/Users/mario/Documents/webs/laravel-subdomain-localization/tests/LocalizeTest.php" line="146" assertions="5" time="0.010388"/>
+      <testcase name="it_detects_and_sets_the_locale_from_the_config" class="Hoyvoy\Tests\LocalizeTest" classname="Hoyvoy.Tests.LocalizeTest" file="/Users/mario/Documents/webs/laravel-subdomain-localization/tests/LocalizeTest.php" line="167" assertions="5" time="0.009139"/>
+      <testcase name="it_responds_with_the_cookie_locale" class="Hoyvoy\Tests\LocalizeTest" classname="Hoyvoy.Tests.LocalizeTest" file="/Users/mario/Documents/webs/laravel-subdomain-localization/tests/LocalizeTest.php" line="185" assertions="2" time="0.007481"/>
+      <testcase name="it_does_not_respond_with_the_cookie_locale_when_cookie_localization_is_disabled" class="Hoyvoy\Tests\LocalizeTest" classname="Hoyvoy.Tests.LocalizeTest" file="/Users/mario/Documents/webs/laravel-subdomain-localization/tests/LocalizeTest.php" line="198" assertions="2" time="0.008243"/>
+    </testsuite>
+    <testsuite name="Hoyvoy\Tests\RouterTest" file="/Users/mario/Documents/webs/laravel-subdomain-localization/tests/RouterTest.php" tests="6" assertions="14" errors="0" failures="0" skipped="0" time="0.073175">
+      <testcase name="it_reaches_translated_routes" class="Hoyvoy\Tests\RouterTest" classname="Hoyvoy.Tests.RouterTest" file="/Users/mario/Documents/webs/laravel-subdomain-localization/tests/RouterTest.php" line="39" assertions="2" time="0.010204"/>
+      <testcase name="it_returns_a_redirect_url" class="Hoyvoy\Tests\RouterTest" classname="Hoyvoy.Tests.RouterTest" file="/Users/mario/Documents/webs/laravel-subdomain-localization/tests/RouterTest.php" line="53" assertions="2" time="0.009059"/>
+      <testcase name="it_translates_the_current_route" class="Hoyvoy\Tests\RouterTest" classname="Hoyvoy.Tests.RouterTest" file="/Users/mario/Documents/webs/laravel-subdomain-localization/tests/RouterTest.php" line="70" assertions="2" time="0.019492"/>
+      <testcase name="it_returns_translated_versions_of_the_current_route_for_available_locales" class="Hoyvoy\Tests\RouterTest" classname="Hoyvoy.Tests.RouterTest" file="/Users/mario/Documents/webs/laravel-subdomain-localization/tests/RouterTest.php" line="89" assertions="2" time="0.016930"/>
+      <testcase name="it_resolves_a_translated_route_path" class="Hoyvoy\Tests\RouterTest" classname="Hoyvoy.Tests.RouterTest" file="/Users/mario/Documents/webs/laravel-subdomain-localization/tests/RouterTest.php" line="110" assertions="2" time="0.008236"/>
+      <testcase name="it_translates_a_route_into_an_url" class="Hoyvoy\Tests\RouterTest" classname="Hoyvoy.Tests.RouterTest" file="/Users/mario/Documents/webs/laravel-subdomain-localization/tests/RouterTest.php" line="126" assertions="4" time="0.009254"/>
+    </testsuite>
+  </testsuite>
+</testsuites>

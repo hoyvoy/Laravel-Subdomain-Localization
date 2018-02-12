@@ -1,5 +1,7 @@
 <?php
 
+namespace Hoyvoy\Tests;
+
 class LocalizeTest extends TestCase
 {
 

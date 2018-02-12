@@ -4,7 +4,7 @@
     "keywords": ["subdomain", "localization", "laravel", "php"],
     "homepage": "https://github.com/hoyvoy/laravel-subdomain-localization",
     "license": "MIT",
-    "version": "5.5.0",
+    "version": "5.6.0",
     "authors": [
         {
             "name": "Mario Aguilar Alves",
@@ -14,20 +14,30 @@
     ],
     "require": {
         "php": ">=7.0.0",
-        "laravel/framework": "5.5.*"
+        "illuminate/support": "^5.6",
+        "illuminate/container": "^5.6",
+        "illuminate/events": "^5.6"
     },
     "require-dev": {
-        "phpunit/phpunit": "~6.3",
-        "orchestra/testbench": "3.5.*",
-        "orchestra/testbench-browser-kit": "~3.4"
+        "phpunit/phpunit": "~7.0",
+        "orchestra/testbench": "3.6.*",
+        "orchestra/testbench-browser-kit": "3.6.*"
     },
     "autoload": {
-        "classmap": [
-            "tests/TestCase.php"
-        ],
         "psr-4": {
             "Hoyvoy\\Localization\\": "src/"
         }
     },
-    "minimum-stability": "dev"
+    "autoload-dev": {
+        "psr-4": {
+            "Hoyvoy\\Tests\\" : "tests"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Hoyvoy\\Localization\\LocalizationServiceProvider"
+            ]
+        }
+    }
 }

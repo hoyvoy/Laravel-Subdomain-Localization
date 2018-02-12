@@ -1,5 +1,7 @@
 <?php
 
+namespace Hoyvoy\Tests;
+
 class RouterTest extends TestCase
 {
 
