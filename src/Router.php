@@ -286,9 +286,9 @@ class Router
 
     /**
      * If locale is aliased, return alias.
-     * 
-     * @param  string $locale Locale to be aliased eg. 'de'
-     * 
+     *
+     * @param string $locale Locale to be aliased eg. 'de'
+     *
      * @return string aliased locale eg. 'german'
      */
     protected function aliasLocale($locale)
