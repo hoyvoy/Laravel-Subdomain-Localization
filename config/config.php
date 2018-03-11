@@ -14,7 +14,24 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Available locales
+    | Subdomain aliases
+    |--------------------------------------------------------------------------
+    |
+    | An associative array describing aliases of locales that should be
+    | detected in the url
+    |
+    | Example: 'german' => 'de' means that german.mydomain.dev sets
+    | locale to 'de' and if locale is set to 'de', routes will be prefixed
+    | with 'german.' instead of 'de.'
+    |
+    */
+    'aliases' => [
+        // 'german' => 'de',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Cookie localization
     |--------------------------------------------------------------------------
     |
     | Use this option to enable or disable the use of cookies
@@ -25,7 +42,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Available locales
+    | Browser localization
     |--------------------------------------------------------------------------
     |
     | Use this option to enable or disable the use of the browser settings
@@ -36,7 +53,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Available locales
+    | Cookie name
     |--------------------------------------------------------------------------
     |
     | Here you may change the name of the cookie used to save the locale.
