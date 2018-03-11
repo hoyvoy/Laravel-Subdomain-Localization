@@ -285,8 +285,10 @@ class Router
     }
 
     /**
-     * If locale is aliased, return alias
+     * If locale is aliased, return alias.
+     * 
      * @param  string $locale Locale to be aliased eg. 'de'
+     * 
      * @return string aliased locale eg. 'german'
      */
     protected function aliasLocale($locale)
@@ -294,7 +296,7 @@ class Router
         $aliases = app()['config']->get('localization.aliases', []);
         $alias = array_search($locale, $aliases);
 
-        if($alias){
+        if ($alias) {
             $locale = $alias;
         }
 

@@ -94,7 +94,7 @@ class LocalizeTest extends TestCase
         $this->assertResponseOk();
     }
 
-     /**
+    /**
      * It detects and sets the locale from an aliased url subdomain.
      *
      * @return void
@@ -102,7 +102,7 @@ class LocalizeTest extends TestCase
     public function testItDetectsAndSetsTheLocaleFromAliasedSubdomain()
     {
         $aliases = [
-            "german" => "de",
+            'german' => 'de',
         ];
 
         $this->app['config']->set('localization.aliases', $aliases);

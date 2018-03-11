@@ -140,7 +140,7 @@ class Localize
 
         $aliases = app()['config']->get('localization.aliases', []);
 
-        if(array_key_exists($locale, $aliases)){
+        if (array_key_exists($locale, $aliases)) {
             $locale = $aliases[$locale];
         }
 

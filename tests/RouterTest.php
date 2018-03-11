@@ -49,9 +49,10 @@ class RouterTest extends TestCase
      *
      * @return void
      */
-    protected function setDomainAliases(){
+    protected function setDomainAliases()
+    {
         $aliases = [
-            "german" => "de",
+            'german' => 'de',
         ];
 
         $this->app['config']->set('localization.aliases', $aliases);
