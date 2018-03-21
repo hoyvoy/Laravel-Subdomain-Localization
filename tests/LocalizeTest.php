@@ -95,6 +95,28 @@ class LocalizeTest extends TestCase
     }
 
     /**
+     * It detects and sets the locale from an aliased url subdomain.
+     *
+     * @return void
+     */
+    public function testItDetectsAndSetsTheLocaleFromAliasedSubdomain()
+    {
+        $aliases = [
+            'german' => 'de',
+        ];
+
+        $this->app['config']->set('localization.aliases', $aliases);
+
+        $this->sendRequest('GET', $this->pathLocalized, 'german');
+
+        $this->assertEquals($this->app->getLocale(), 'de');
+
+        $this->assertFalse(app('localization.localize')->shouldRedirect());
+
+        $this->assertResponseOk();
+    }
+
+    /**
      * It detects and sets the locale from the cookies.
      *
      * @return void

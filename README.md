@@ -172,6 +172,14 @@ This option is used only if localization with cookie is enabled.
 Here you may change the name of the domain used in your application.
 By default, the domain is read from the .env file.
 
+- `aliases` (defaults to empty array)
+
+You can specify aliases to use custom subdomains instead of locale codes.
+
+Example: `['german' => 'de']` means that `german.mydomain.dev` sets
+locale to `de` and if locale is set to `de`, routes will be prefixed
+with `german.` instead of `de.`
+
 ## Useful functions
 
 The package provides useful functions that you can use - for example - in your views:

@@ -136,7 +136,15 @@ class Localize
     {
         $segments = explode('.', app()['request']->getHttpHost());
 
-        return $segments[0];
+        $locale = $segments[0];
+
+        $aliases = app()['config']->get('localization.aliases', []);
+
+        if (array_key_exists($locale, $aliases)) {
+            $locale = $aliases[$locale];
+        }
+
+        return $locale;
     }
 
     /**

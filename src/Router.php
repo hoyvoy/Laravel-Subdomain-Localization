@@ -35,7 +35,8 @@ class Router
         $parsed_url = parse_url(app()['request']->fullUrl());
 
         // Add locale to the host
-        $parsed_url['host'] = app()->getLocale().'.'.$this->getDomain();
+        $locale = $this->aliasLocale(app()->getLocale());
+        $parsed_url['host'] = $locale.'.'.$this->getDomain();
 
         return $this->unparseUrl($parsed_url);
     }
@@ -100,7 +101,7 @@ class Router
         $parsed_url = $this->parsed_url;
 
         // Add locale to the host
-        $parsed_url['host'] = $locale.'.'.$this->getDomain();
+        $parsed_url['host'] = $this->aliasLocale($locale).'.'.$this->getDomain();
 
         // Resolve the route path for the given route name
         if (!$parsed_url['path'] = $this->findRoutePathByName($routeName, $locale)) {
@@ -281,5 +282,24 @@ class Router
     protected function getDomain()
     {
         return app()['config']->get('localization.domain');
+    }
+
+    /**
+     * If locale is aliased, return alias.
+     *
+     * @param string $locale Locale to be aliased eg. 'de'
+     *
+     * @return string aliased locale eg. 'german'
+     */
+    protected function aliasLocale($locale)
+    {
+        $aliases = app()['config']->get('localization.aliases', []);
+        $alias = array_search($locale, $aliases);
+
+        if ($alias) {
+            $locale = $alias;
+        }
+
+        return $locale;
     }
 }
