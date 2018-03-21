@@ -1,5 +1,11 @@
 # Changelog
 
+## 5.6.3 - 2018-03-21
+
+Features:
+
+  - Added aliases for subdomains
+
 ## 5.6.0 - 2018-01-12
 
 Features:
