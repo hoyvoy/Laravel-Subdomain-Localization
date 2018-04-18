@@ -103,9 +103,10 @@ class Router
         // Add locale to the host
         $parsed_url['host'] = $this->aliasLocale($locale).'.'.$this->getDomain();
 
-        // Resolve the route path for the given route name
-        if (!$parsed_url['path'] = $this->findRoutePathByName($routeName, $locale)) {
-            return false;
+        // Resolve the translated route path for the given route name
+        $translatedPath = $this->findRoutePathByName($routeName, $locale);
+        if ($translatedPath !== false) {
+            $parsed_url['path'] = $translatedPath;
         }
 
         // If attributes are given, substitute them in the path
@@ -265,7 +266,6 @@ class Router
         $parsed_url = parse_url(app()['request']->fullUrl());
 
         // Don't store path, query and fragment
-        unset($parsed_url['path']);
         unset($parsed_url['query']);
         unset($parsed_url['fragment']);
 
