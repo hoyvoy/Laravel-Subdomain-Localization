@@ -1,8 +1,9 @@
 <?php
 
+namespace Hoyvoy\Tests;
+
 class RouterTest extends TestCase
 {
-
     protected $routeNameWithoutParameter = 'Localize::routes.good_morning';
     protected $dePathWithoutParameter = 'guten-morgen';
     protected $enPathWithoutParameter = 'good-morning';
@@ -14,41 +15,73 @@ class RouterTest extends TestCase
     protected $enPathWithParameter1 = 'hello/samplename';
     protected $routeParameters = ['username' => 'samplename'];
 
+    /**
+     * Get package providers.
+     *
+     * @param \Illuminate\Foundation\Application $app
+     *
+     * @return array
+     */
     protected function getPackageProviders($app)
     {
         return [
-            'Hoyvoy\Localization\LocalizationServiceProvider'
-        ];
-    }
-
-    protected function getPackageAliases($app)
-    {
-        return [
-            'Localize' => 'Hoyvoy\Localization\Facades\Localize',
-            'Router' => 'Hoyvoy\Localization\Facades\Router',
+            'Hoyvoy\Localization\LocalizationServiceProvider',
         ];
     }
 
     /**
-     * It translates routes
+     * Get package aliases.
      *
-     * @test
+     * @param \Illuminate\Foundation\Application $app
+     *
+     * @return array
      */
-    public function it_reaches_translated_routes()
+    protected function getPackageAliases($app)
+    {
+        return [
+            'Localize' => 'Hoyvoy\Localization\Facades\Localize',
+            'Router'   => 'Hoyvoy\Localization\Facades\Router',
+        ];
+    }
+
+    /**
+     * Sets domain alias german to de.
+     *
+     * @return void
+     */
+    protected function setDomainAliases()
+    {
+        $aliases = [
+            'german' => 'de',
+        ];
+
+        $this->app['config']->set('localization.aliases', $aliases);
+    }
+
+    /**
+     * It translates routes.
+     *
+     * @return void
+     */
+    public function testItReachesTranslatedRoutes()
     {
         $this->sendRequest('GET', $this->dePathWithoutParameter, 'de');
         $this->assertResponseOk();
 
         $this->sendRequest('GET', $this->enPathWithoutParameter, 'en');
         $this->assertResponseOk();
+
+        $this->setDomainAliases();
+        $this->sendRequest('GET', $this->dePathWithoutParameter, 'german');
+        $this->assertResponseOk();
     }
 
     /**
-     * It returns a redirect URL
+     * It returns a redirect URL.
      *
-     * @test
+     * @return void
      */
-    public function it_returns_a_redirect_url()
+    public function testItReturnsARedirectUrl()
     {
         $this->setRequestContext('GET', $this->dePathWithoutParameter, null, [], ['locale' => 'de']);
         $this->assertEquals($this->getUri($this->dePathWithoutParameter, 'de'),
@@ -57,15 +90,19 @@ class RouterTest extends TestCase
         $this->setRequestContext('GET', $this->enPathWithoutParameter, null, [], ['locale' => 'en']);
         $this->assertEquals($this->getUri($this->enPathWithoutParameter, 'en'),
             app('localization.router')->getRedirectURL());
+
+        $this->setDomainAliases();
+        $this->setRequestContext('GET', $this->dePathWithoutParameter, null, [], ['locale' => 'de']);
+        $this->assertEquals($this->getUri($this->dePathWithoutParameter, 'german'),
+            app('localization.router')->getRedirectURL());
     }
 
-
     /**
-     * It translates the current route
+     * It translates the current route.
      *
-     * @test
+     * @return void
      */
-    public function it_translates_the_current_route()
+    public function testItTranslatesTheCurrentRoute()
     {
         $this->sendRequest('GET', $this->dePathWithoutParameter, 'de');
 
@@ -77,18 +114,25 @@ class RouterTest extends TestCase
         $this->sendRequest('GET', $this->enPathWithParameter1, 'en');
         $this->assertEquals($this->getUri($this->dePathWithParameter1, 'de'),
             app('localization.router')->current('de'));
+
+        $this->refresh();
+
+        $this->setDomainAliases();
+        $this->sendRequest('GET', $this->enPathWithParameter1, 'en');
+        $this->assertEquals($this->getUri($this->dePathWithParameter1, 'german'),
+            app('localization.router')->current('de'));
     }
 
     /**
-     * It returns translated versions of the current route for all available locales
+     * It returns translated versions of the current route for all available locales.
      *
-     * @test
+     * @return void
      */
-    public function it_returns_translated_versions_of_the_current_route_for_available_locales()
+    public function testItReturnsTranslatedVersionsOfTheCurrentRouteForAvailableLocales()
     {
         $this->sendRequest('GET', $this->dePathWithoutParameter, 'de');
         $this->assertEquals([
-            'en' => $this->getUri($this->enPathWithoutParameter, 'en')
+            'en' => $this->getUri($this->enPathWithoutParameter, 'en'),
         ], app('localization.router')->getCurrentVersions());
 
         $this->refresh();
@@ -96,16 +140,25 @@ class RouterTest extends TestCase
         $this->sendRequest('GET', $this->enPathWithParameter1, 'en');
         $this->assertEquals([
             'en' => $this->getUri($this->enPathWithParameter1, 'en'),
-            'de' => $this->getUri($this->dePathWithParameter1, 'de')
+            'de' => $this->getUri($this->dePathWithParameter1, 'de'),
+        ], app('localization.router')->getCurrentVersions(false));
+
+        $this->refresh();
+
+        $this->setDomainAliases();
+        $this->sendRequest('GET', $this->enPathWithParameter1, 'en');
+        $this->assertEquals([
+            'en' => $this->getUri($this->enPathWithParameter1, 'en'),
+            'de' => $this->getUri($this->dePathWithParameter1, 'german'),
         ], app('localization.router')->getCurrentVersions(false));
     }
 
     /**
-     * It resolves a translated route path
+     * It resolves a translated route path.
      *
-     * @test
+     * @return void
      */
-    public function it_resolves_a_translated_route_path()
+    public function testItResolvesATranslatedRoutePath()
     {
         $this->setRequestContext('GET', '', 'de');
         $this->assertEquals($this->dePathWithoutParameter,
@@ -117,13 +170,12 @@ class RouterTest extends TestCase
     }
 
     /**
-     * It translates a route into an url
+     * It translates a route into an url.
      *
-     * @test
+     * @return void
      */
-    public function it_translates_a_route_into_an_url()
+    public function testItTranslatesARouteIntoAnUrl()
     {
-
         $this->setRequestContext('GET', '');
 
         $this->assertEquals(
@@ -143,6 +195,12 @@ class RouterTest extends TestCase
             app('localization.router')->url($this->routeNameWithParameter, $this->routeParameters)
         );
 
+        $this->setDomainAliases();
+        $this->assertEquals(
+            $this->getUri($this->dePathWithParameter1, 'german'),
+            app('localization.router')->url($this->routeNameWithParameter, $this->routeParameters)
+        );
+
         $this->setRequestContext('GET', '', 'en');
 
         $this->assertEquals(
@@ -150,5 +208,4 @@ class RouterTest extends TestCase
             app('localization.router')->url($this->routeNameWithParameter, $this->routeParameters)
         );
     }
-
 }

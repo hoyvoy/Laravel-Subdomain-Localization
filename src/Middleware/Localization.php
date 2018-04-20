@@ -1,18 +1,20 @@
-<?php namespace Hoyvoy\Localization\Middleware;
+<?php
 
-use Illuminate\Http\RedirectResponse;
+namespace Hoyvoy\Localization\Middleware;
+
 use Closure;
 use Hoyvoy\Localization\Facades\Localize;
 use Hoyvoy\Localization\Facades\Router;
+use Illuminate\Http\RedirectResponse;
 
 class Localization
 {
-
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  \Closure $next
+     * @param \Illuminate\Http\Request $request
+     * @param \Closure                 $next
+     *
      * @return mixed
      */
     public function handle($request, Closure $next)
@@ -23,5 +25,4 @@ class Localization
 
         return $next($request);
     }
-
 }

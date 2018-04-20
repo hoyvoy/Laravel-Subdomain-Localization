@@ -1,18 +1,18 @@
-<?php namespace Hoyvoy\Localization;
+<?php
+
+namespace Hoyvoy\Localization;
 
 use Illuminate\Http\Request;
 
 class Localize
 {
-
     /**
      * @var Request
      */
     protected $request;
 
-
     /**
-     * If the detected locale is different from the url locale, we should redirect
+     * If the detected locale is different from the url locale, we should redirect.
      *
      * @return bool
      */
@@ -22,7 +22,7 @@ class Localize
     }
 
     /**
-     * Detect the current locale:
+     * Detect the current locale.
      *
      * - parsing the requested URL
      * - checking cookies
@@ -54,7 +54,7 @@ class Localize
     }
 
     /**
-     * Get available locales from package config
+     * Get available locales from package config.
      *
      * @return array
      */
@@ -64,7 +64,7 @@ class Localize
     }
 
     /**
-     * Get cookie localization status from package config
+     * Get cookie localization status from package config.
      *
      * @return array
      */
@@ -74,7 +74,7 @@ class Localize
     }
 
     /**
-     * Get browser localization status from package config
+     * Get browser localization status from package config.
      *
      * @return array
      */
@@ -84,7 +84,7 @@ class Localize
     }
 
     /**
-     * Set cookie and application locale
+     * Set cookie and application locale.
      *
      * @param $locale
      */
@@ -98,7 +98,7 @@ class Localize
     }
 
     /**
-     * Get current application locale
+     * Get current application locale.
      *
      * @return string
      */
@@ -108,7 +108,7 @@ class Localize
     }
 
     /**
-     * Get default locale
+     * Get default locale.
      *
      * @return mixed
      */
@@ -118,7 +118,7 @@ class Localize
     }
 
     /**
-     * Get browser locale
+     * Get browser locale.
      *
      * @return mixed
      */
@@ -128,7 +128,7 @@ class Localize
     }
 
     /**
-     * Get locale from the url
+     * Get locale from the url.
      *
      * @return mixed
      */
@@ -136,11 +136,19 @@ class Localize
     {
         $segments = explode('.', app()['request']->getHttpHost());
 
-        return $segments[0];
+        $locale = $segments[0];
+
+        $aliases = app()['config']->get('localization.aliases', []);
+
+        if (array_key_exists($locale, $aliases)) {
+            $locale = $aliases[$locale];
+        }
+
+        return $locale;
     }
 
     /**
-     * Set cookie locale
+     * Set cookie locale.
      *
      * @param $locale
      */
@@ -150,7 +158,7 @@ class Localize
     }
 
     /**
-     * Get cookie locale
+     * Get cookie locale.
      *
      * @return mixed
      */
@@ -160,14 +168,14 @@ class Localize
     }
 
     /**
-     * Check if the given locale is accepted by the application
+     * Check if the given locale is accepted by the application.
      *
      * @param $locale
+     *
      * @return bool
      */
     protected function isLocaleAvailable($locale)
     {
         return in_array($locale, $this->getAvailableLocales());
     }
-
 }

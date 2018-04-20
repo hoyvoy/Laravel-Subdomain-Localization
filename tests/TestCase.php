@@ -1,12 +1,13 @@
 <?php
 
+namespace Hoyvoy\Tests;
+
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Request;
 use Orchestra\Testbench\BrowserKit\TestCase as OrchestraTestCase;
 
 class TestCase extends OrchestraTestCase
 {
-
     protected $scheme = 'https';
     protected $domain = 'localize.dev';
 
@@ -20,7 +21,7 @@ class TestCase extends OrchestraTestCase
     }
 
     /**
-     * Refresh the configuration
+     * Refresh the configuration.
      */
     public function refreshConfig()
     {
@@ -29,7 +30,7 @@ class TestCase extends OrchestraTestCase
     }
 
     /**
-     * Refresh application & config during a test
+     * Refresh application & config during a test.
      */
     public function refresh()
     {
@@ -40,14 +41,15 @@ class TestCase extends OrchestraTestCase
     /**
      * Visit the given URI and return the Response.
      *
-     * @param  string $method
-     * @param  string $path
-     * @param  string $locale
-     * @param  array $parameters
-     * @param  array $cookies
-     * @param  array $files
-     * @param  array $server
-     * @param  string $content
+     * @param string $method
+     * @param string $path
+     * @param string $locale
+     * @param array  $parameters
+     * @param array  $cookies
+     * @param array  $files
+     * @param array  $server
+     * @param string $content
+     *
      * @return Response
      */
     protected function sendRequest($method, $path, $locale = null, $parameters = [], $cookies = [], $files = [], $server = [], $content = null)
@@ -60,16 +62,17 @@ class TestCase extends OrchestraTestCase
     }
 
     /**
-     * Set Request context for the package components
+     * Set Request context for the package components.
      *
-     * @param  string $method
-     * @param  string $path
-     * @param  string $locale
-     * @param  array $parameters
-     * @param  array $cookies
-     * @param  array $files
-     * @param  array $server
-     * @param  string $content
+     * @param string $method
+     * @param string $path
+     * @param string $locale
+     * @param array  $parameters
+     * @param array  $cookies
+     * @param array  $files
+     * @param array  $server
+     * @param string $content
+     *
      * @return Response
      */
     protected function setRequestContext($method, $path, $locale = null, $parameters = [], $cookies = [], $files = [], $server = [], $content = null)
@@ -86,21 +89,23 @@ class TestCase extends OrchestraTestCase
     }
 
     /**
-     * Return test Uri for the given locale and path
+     * Return test Uri for the given locale and path.
      *
-     * @param  string $path
-     * @param  string $locale
+     * @param string $path
+     * @param string $locale
+     *
      * @return string
      */
     public function getUri($path, $locale = null)
     {
-        $uri = $this->scheme . '://' . ($locale ? $locale . '.' : '') . $this->domain . '/' . $path;
+        $uri = $this->scheme.'://'.($locale ? $locale.'.' : '').$this->domain.'/'.$path;
 
         return $uri;
     }
 
     /**
-     * Set routes for testing
+     * Set routes for testing.
+     *
      * @param bool|string $locale
      */
     protected function setRoutes($locale = false)
@@ -110,19 +115,20 @@ class TestCase extends OrchestraTestCase
         }
 
         // Load translated routes for testing
-        app('translator')->getLoader()->addNamespace('Localize', realpath(dirname(__FILE__)) . "/lang");
+        app('translator')->getLoader()->addNamespace('Localize', realpath(dirname(__FILE__)).'/lang');
         app('translator')->load('Localize', 'routes', 'de');
         app('translator')->load('Localize', 'routes', 'en');
 
         // Load routes for testing
-        app('files')->getRequire(__DIR__ . '/routing/routes.php');
+        app('files')->getRequire(__DIR__.'/routing/routes.php');
     }
 
     /**
-     * Checks if the given response contains the given cookie(s)
+     * Checks if the given response contains the given cookie(s).
      *
      * @param Response $response
-     * @param array $cookies
+     * @param array    $cookies
+     *
      * @return bool
      */
     protected function responseHasCookies(Response $response, $cookies)
@@ -130,31 +136,25 @@ class TestCase extends OrchestraTestCase
         $responseCookies = $response->headers->getCookies();
 
         foreach ($cookies as $cookieName => $cookieValue) {
-
             $cookieFound = false;
 
             foreach ($responseCookies as $cookie) {
 
                 // The cookie is found but with an unexpected value
                 if ($cookieName == $cookie->getName()) {
-
                     $cookieFound = true;
 
                     if ($cookieValue != $cookie->getValue()) {
                         return false;
                     }
-
                 }
-
             }
 
             if (!$cookieFound) {
                 return false;
             }
-
         }
 
         return true;
     }
-
 }

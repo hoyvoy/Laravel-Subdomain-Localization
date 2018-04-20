@@ -1,10 +1,11 @@
-<?php namespace Hoyvoy\Localization;
+<?php
+
+namespace Hoyvoy\Localization;
 
 use Illuminate\Support\ServiceProvider;
 
 class LocalizationServiceProvider extends ServiceProvider
 {
-
     /**
      * Bootstrap the application events.
      *
@@ -13,7 +14,7 @@ class LocalizationServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__ . '/../config/config.php' => config_path('localization.php'),
+            __DIR__.'/../config/config.php' => config_path('localization.php'),
         ], 'config');
     }
 
@@ -24,8 +25,7 @@ class LocalizationServiceProvider extends ServiceProvider
      */
     public function register()
     {
-
-        $packageConfigFile = __DIR__ . '/../config/config.php';
+        $packageConfigFile = __DIR__.'/../config/config.php';
         $this->mergeConfigFrom(
             $packageConfigFile, 'localization'
         );
@@ -37,7 +37,5 @@ class LocalizationServiceProvider extends ServiceProvider
         $this->app->singleton('localization.router', function () {
             return new Router();
         });
-
     }
-
 }

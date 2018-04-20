@@ -1,32 +1,47 @@
 <?php
 
+namespace Hoyvoy\Tests;
+
 class LocalizeTest extends TestCase
 {
-
     protected $pathLocalized = 'localized';
     protected $pathNotLocalized = 'not-localized';
 
+    /**
+     * Get package providers.
+     *
+     * @param \Illuminate\Foundation\Application $app
+     *
+     * @return array
+     */
     protected function getPackageProviders($app)
     {
         return [
-            'Hoyvoy\Localization\LocalizationServiceProvider'
-        ];
-    }
-
-    protected function getPackageAliases($app)
-    {
-        return [
-            'Localize' => 'Hoyvoy\Localization\Facades\Localize',
-            'Router' => 'Hoyvoy\Localization\Facades\Router',
+            'Hoyvoy\Localization\LocalizationServiceProvider',
         ];
     }
 
     /**
-     * It returns the available locales
+     * Get package aliases.
      *
-     * @test
+     * @param \Illuminate\Foundation\Application $app
+     *
+     * @return array
      */
-    public function it_returns_the_available_locales()
+    protected function getPackageAliases($app)
+    {
+        return [
+            'Localize' => 'Hoyvoy\Localization\Facades\Localize',
+            'Router'   => 'Hoyvoy\Localization\Facades\Router',
+        ];
+    }
+
+    /**
+     * It returns the available locales.
+     *
+     * @return void
+     */
+    public function testItReturnsTheAvailableLocales()
     {
         $availableLocales = ['en', 'es', 'fr', 'de'];
 
@@ -36,11 +51,11 @@ class LocalizeTest extends TestCase
     }
 
     /**
-     * It should not redirect a non-localized route
+     * It should not redirect a non-localized route.
      *
-     * @test
+     * @return void
      */
-    public function it_does_not_redirect_a_non_localized_route()
+    public function testItDoesNotRedirectANonLocalizedRoute()
     {
         $this->sendRequest('GET', $this->pathNotLocalized);
 
@@ -48,11 +63,11 @@ class LocalizeTest extends TestCase
     }
 
     /**
-     * It should not redirect if the locale is not missing
+     * It should not redirect if the locale is not missing.
      *
-     * @test
+     * @return void
      */
-    public function it_does_not_redirect_if_locale_is_not_missing()
+    public function testItDoesNotRedirectIfLocaleIsNotMissing()
     {
         $this->sendRequest('GET', $this->pathLocalized, 'de');
 
@@ -64,11 +79,11 @@ class LocalizeTest extends TestCase
     }
 
     /**
-     * It detects and sets the locale from the url
+     * It detects and sets the locale from the url.
      *
-     * @test
+     * @return void
      */
-    public function it_detects_and_sets_the_locale_from_the_url()
+    public function testItDetectsAndSetsTheLocaleFromTheUrl()
     {
         $this->sendRequest('GET', $this->pathLocalized, 'de');
 
@@ -80,11 +95,33 @@ class LocalizeTest extends TestCase
     }
 
     /**
-     * It detects and sets the locale from the cookies
+     * It detects and sets the locale from an aliased url subdomain.
      *
-     * @test
+     * @return void
      */
-    public function it_detects_and_sets_the_locale_from_the_cookies()
+    public function testItDetectsAndSetsTheLocaleFromAliasedSubdomain()
+    {
+        $aliases = [
+            'german' => 'de',
+        ];
+
+        $this->app['config']->set('localization.aliases', $aliases);
+
+        $this->sendRequest('GET', $this->pathLocalized, 'german');
+
+        $this->assertEquals($this->app->getLocale(), 'de');
+
+        $this->assertFalse(app('localization.localize')->shouldRedirect());
+
+        $this->assertResponseOk();
+    }
+
+    /**
+     * It detects and sets the locale from the cookies.
+     *
+     * @return void
+     */
+    public function testItDetectsAndSetsTheLocaleFromTheCookies()
     {
         $this->sendRequest('GET', $this->pathLocalized, null, [], ['locale' => 'de']);
 
@@ -96,13 +133,13 @@ class LocalizeTest extends TestCase
 
         $this->assertRedirectedTo($this->getUri($this->pathLocalized, 'de'));
     }
-    
+
     /**
-     * It ignores cookies when cookie localization is disabled
+     * It ignores cookies when cookie localization is disabled.
      *
-     * @test
+     * @return void
      */
-    public function it_ignores_cookies_when_cookie_localization_is_disabled()
+    public function testItIgnoresCookiesWhenCookieLocalizationIsDisabled()
     {
         // Disable cookie localization
         app('config')->set('localization.cookie_localization', false);
@@ -119,11 +156,11 @@ class LocalizeTest extends TestCase
     }
 
     /**
-     * It detects and sets the locale from the browser language settings
+     * It detects and sets the locale from the browser language settings.
      *
-     * @test
+     * @return void
      */
-    public function it_detects_and_sets_the_locale_from_the_browser()
+    public function testItDetectsAndSetsTheLocaleFromTheBrowser()
     {
         $this->sendRequest('GET', $this->pathLocalized, null, [], [], [], ['HTTP_ACCEPT_LANGUAGE' => 'de']);
 
@@ -137,11 +174,11 @@ class LocalizeTest extends TestCase
     }
 
     /**
-     * It ignores browser settings when browser localization is disabled
+     * It ignores browser settings when browser localization is disabled.
      *
-     * @test
+     * @return void
      */
-    public function it_ignores_browser_settings_when_browser_localization_is_disabled()
+    public function testItIgnoresBrowserSettingsWhenBrowserLocalizationIsDisabled()
     {
         // Disable browser localization
         app('config')->set('localization.browser_localization', false);
@@ -158,11 +195,11 @@ class LocalizeTest extends TestCase
     }
 
     /**
-     * It detects and sets the locale from the default locale setting
+     * It detects and sets the locale from the default locale setting.
      *
-     * @test
+     * @return void
      */
-    public function it_detects_and_sets_the_locale_from_the_config()
+    public function testItDetectsAndSetsTheLocaleFromTheConfig()
     {
         $this->sendRequest('GET', $this->pathLocalized);
 
@@ -176,24 +213,24 @@ class LocalizeTest extends TestCase
     }
 
     /**
-     * It responds with the cookie locale
+     * It responds with the cookie locale.
      *
-     * @test
+     * @return void
      */
-    public function it_responds_with_the_cookie_locale()
+    public function testItRespondsWithTheCookieLocale()
     {
         $response = $this->sendRequest('GET', $this->pathLocalized, 'de');
 
         $this->assertTrue($this->responseHasCookies($response, ['locale' => 'de']));
         $this->assertResponseOk();
     }
-    
+
     /**
-     * it does not respond with the cookie locale when cookie localization is disabled
+     * it does not respond with the cookie locale when cookie localization is disabled.
      *
-     * @test
+     * @return void
      */
-    public function it_does_not_respond_with_the_cookie_locale_when_cookie_localization_is_disabled()
+    public function testItDoesNotRespondWithTheCookieLocaleWhenCookieLocalizationIsDisabled()
     {
         // Disable cookie localization
         app('config')->set('localization.cookie_localization', false);
@@ -203,5 +240,4 @@ class LocalizeTest extends TestCase
         $this->assertFalse($this->responseHasCookies($response, ['locale' => 'de']));
         $this->assertResponseOk();
     }
-
 }
