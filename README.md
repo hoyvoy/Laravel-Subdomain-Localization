@@ -2,7 +2,16 @@
 
 # Laravel-Subdomain-Localization
 
-Subdomain localization support for Laravel 5.6.*
+Subdomain localization support for Laravel
+
+| **Laravel**  |  **laravel-subdomain-localization** |  **Lifecycle** |
+|---|---|---|
+| ^5.5  | ^5.5  | January 24, 2017 |
+||| Bug fixes until January 2019 |
+||| Security fixes until June 2020 |
+| ^5.6  | ^5.6  | February 7, 2018 |
+||| 6 months of bug fixes |
+||| 1 year of security |
 
 ## Table of Contents
 
