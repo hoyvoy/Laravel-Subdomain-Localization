@@ -4,7 +4,6 @@
     "keywords": ["subdomain", "localization", "laravel", "php"],
     "homepage": "https://github.com/hoyvoy/laravel-subdomain-localization",
     "license": "MIT",
-    "version": "5.5.0",
     "authors": [
         {
             "name": "Mario Aguilar Alves",
