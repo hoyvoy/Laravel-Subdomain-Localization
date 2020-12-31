@@ -196,7 +196,7 @@ class Router
     protected function findRoutePathByName($routeName, $locale = null)
     {
         if (app()['translator']->has($routeName, $locale)) {
-            return app()['translator']->trans($routeName, [], $locale);
+            return app()['translator']->get($routeName, [], $locale);
         }
 
         return false;
